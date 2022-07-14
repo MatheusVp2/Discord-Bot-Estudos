@@ -13,7 +13,8 @@ const client = new Client({
         Intents.FLAGS.DIRECT_MESSAGES,
         Intents.FLAGS.GUILD_MESSAGES,
         Intents.FLAGS.GUILD_MEMBERS,
-        Intents.FLAGS.GUILD_PRESENCES
+        Intents.FLAGS.GUILD_PRESENCES,
+        Intents.FLAGS.GUILD_MESSAGE_REACTIONS
     ]
 });
 
@@ -32,13 +33,11 @@ client.once( 'ready', async () => {
 });
 
 client.on('messageCreate', async (message) => {
-    if(message.author.bot) return;
-
-    if (message.channel.type === 'DM') recebeMensagemDM(message);
-    if (message.channel.type === 'GUILD_TEXT') recebeMensagemChanel(message);
-    
-    console.log(message.author.username);
-    console.log(message.channel.type);
+    console.log('atnes');
+    if(message.author.bot || (message.content.slice(0,3) === '.bot')) return;
+    if (message.channel.type === 'DM') await recebeMensagemDM(message);
+    if (message.channel.type === 'GUILD_TEXT') await recebeMensagemChanel(message);
+    console.log('depoisIf');
     
      
 })

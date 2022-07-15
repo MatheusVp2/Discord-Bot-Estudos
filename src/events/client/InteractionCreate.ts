@@ -11,8 +11,8 @@ export default class extends Event {
 
     run = (interaction: Interaction<CacheType>) => {
         if (interaction.isCommand()) {
-            const cmd = this.client.commands.find(c => c.name === interaction.commandName)
-            if (cmd)cmd.run(interaction)
+            const cmd = this.client.commands.find( c => c.name === interaction.commandName )
+            if (cmd) cmd.run(interaction)
         }
     }
 }

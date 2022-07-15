@@ -2,8 +2,6 @@ import { Intents } from "discord.js";
 import "dotenv/config";
 import Client from "./structures/Client";
 
-
-const SERVER_ID = process.env.CLIENT_ID_DISCORD || null;
 const CLIENT_SECRET = process.env.SECRET_DISCORD_BOT || null;
 
 const client = new Client({

@@ -6,14 +6,11 @@ export default class PingCommand extends Command {
     constructor(client: Client) {
         super(client, {
             name: 'ucl-ping',
-            description: 'Mostra o ping do bot',
+            description: 'Mostra o ping do bot'
         })
     }
 
     run = (interaction: Message) => {
-        console.log('asdasdasd');
-        
         interaction.reply('pong');
-        
     }
 }

@@ -1,5 +1,5 @@
 
-import { OptionsType } from "../types/optionsType";
+import { OptionsType } from "../types/OptionsType";
 import Client from "./Client";
 
 export class Event {
@@ -10,6 +10,5 @@ export class Event {
     constructor(client: Client, options: OptionsType) {
         this.client = client;
         this.name = options.name;
-        
     }
 }

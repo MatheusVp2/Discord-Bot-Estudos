@@ -5,6 +5,7 @@ import { join } from "path/posix";
 
 export default class extends Client {
     public commands: any[];
+    
     constructor(options) {
         super(options)
 
@@ -14,7 +15,7 @@ export default class extends Client {
     }
 
     registryCommands() {
-        this.guilds.cache.get(process.env.CLIENT_ID_DISCORD).commands.set(this.commands);
+        this.application.commands.set(this.commands);
     }
 
     async loadCommands(path = 'src/commands') {
@@ -29,7 +30,6 @@ export default class extends Client {
 
                 this.commands.push(cmd)
                 console.log(`Comando ${cmd.name} carregado`);
-
             }
         }
     }
@@ -41,7 +41,6 @@ export default class extends Client {
             for (const event of events) {
                 const eventClass = await import(join(process.cwd(), `${path}/${category}/${event}`));
                 const evt = new (eventClass).default(this)
-
 
                 this.on(evt.name, evt.run);
                 console.log(`Event ${evt.name} carregado`);

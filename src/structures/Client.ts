@@ -1,21 +1,22 @@
 import { Client } from "discord.js";
 import "dotenv/config";
-import { readdirSync } from "fs";
+import { readdirSync, writeFileSync } from "fs";
 import { join } from "path/posix";
 
+
 export default class extends Client {
-    public commands: any[];
+    public comandos: any[];
     
     constructor(options) {
         super(options)
 
-        this.commands = []
+        this.comandos = []
         this.loadCommands();
         this.loadEvents();
     }
 
-    registryCommands() {
-        this.application.commands.set(this.commands);
+    async registryCommands() {
+        this.application.commands.set(this.comandos);
     }
 
     async loadCommands(path = 'src/commands') {
@@ -28,7 +29,7 @@ export default class extends Client {
                 
                 const cmd = new (commandClass).default(this)
 
-                this.commands.push(cmd)
+                this.comandos.push(cmd)
                 console.log(`Comando ${cmd.name} carregado`);
             }
         }

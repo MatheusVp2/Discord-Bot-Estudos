@@ -1,6 +1,5 @@
 import { Client, Intents } from "discord.js";
 import "dotenv/config";
-import { recebeMensagemChanel, recebeMensagemDM } from "./controller/operations";
 
 
 const SERVER_ID = process.env.CLIENT_ID_DISCORD || null;
@@ -20,7 +19,7 @@ const client = new Client({
 
 client.login( CLIENT_SECRET );
 
-client.once( 'ready', async () => {
+/* client.once( 'ready', async () => {
     console.log("Bot Online com Sucesso.");
 
     let servidor = client.guilds.cache.get(SERVER_ID)
@@ -34,10 +33,11 @@ client.once( 'ready', async () => {
 
 client.on('messageCreate', async (message) => {
     console.log('atnes');
+    
     if(message.author.bot || (message.content.slice(0,3) === '.bot')) return;
     if (message.channel.type === 'DM') await recebeMensagemDM(message);
     if (message.channel.type === 'GUILD_TEXT') await recebeMensagemChanel(message);
     console.log('depoisIf');
     
      
-})
+}) */

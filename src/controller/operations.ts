@@ -7,9 +7,6 @@ var emojis = ['😎','😀','😂','😃','🐵'];
 export async function recebeMensagemDM(mensagem:Message) {
 	const textMensagem = mensagem.content.slice(5,mensagem.content.length)
     reajirMensagem(mensagem, emojis);
-	
-	console.log('antes if');
-	console.log(textMensagem);
 	if (textMensagem.split(' ')[0] === 'logar') {
 		console.log('entrou logar');
 		
@@ -19,16 +16,18 @@ export async function recebeMensagemDM(mensagem:Message) {
 		var notas;
 		try {
 			token = (await logarWebAluno(login, senha)).data.token;
-			notas = (await getNotas(token)).data.periodo;
-			console.log('notas');
+			notas = (await getNotas(token)).data;
 			console.log(notas);
+			
+			console.log('notas');
+			console.log(notas.status);
 			
 		} catch (error) {
 			console.log(error);
 			
 		}
+		mensagem.author.send(`${notas.status}` ?? 'sem dados retornados');
 		
-		mensagem.author.send(notas ?? 'sem dados retornados');
 		return;
 	}
 

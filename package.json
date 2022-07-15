@@ -2,8 +2,9 @@
   "name": "encrypt-data-api",
   "version": "1.0.0",
   "description": "",
-  "main": "src/server.ts",
+  "main": "src/index.ts",
   "scripts": {
+    "start": "ts-node src/index.ts",
     "dev": "ts-node-dev --respawn --transpileOnly src/server.ts",
     "script": "ts-node src/script.ts"
   },

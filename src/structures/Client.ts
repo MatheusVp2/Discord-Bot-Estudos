@@ -25,12 +25,9 @@ export default class extends Client {
             const commands = readdirSync(`${path}/${category}`)
             for (const command of commands) {
                 const commandClass = await import(join(process.cwd(), `${path}/${category}/${command}`));
-                console.log(commandClass);
-                
                 const cmd = new (commandClass).default(this)
-
                 this.comandos.push(cmd)
-                console.log(`Comando ${cmd.name} carregado`);
+                console.log(`Comando ${cmd.name} Carregado`);
             }
         }
     }
@@ -42,7 +39,6 @@ export default class extends Client {
             for (const event of events) {
                 const eventClass = await import(join(process.cwd(), `${path}/${category}/${event}`));
                 const evt = new (eventClass).default(this)
-
                 this.on(evt.name, evt.run);
                 console.log(`Event ${evt.name} carregado`);
             }

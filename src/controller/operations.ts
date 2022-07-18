@@ -62,6 +62,10 @@ async function getNotas(token:string) {
 	  return axios.request(options);
 }
 
+async function registraUsuario(usuario:string, senha: string) {
+	
+}
+
 async function reajirMensagem(mensagem:Message, emojis: Array<string>) {
     return emojis.map(async (emoji) => {
         (await mensagem).react(emoji);

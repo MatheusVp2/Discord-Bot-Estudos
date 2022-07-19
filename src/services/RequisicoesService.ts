@@ -1,37 +1,42 @@
 import { api } from "./api";
 
 export class RequisicoesService {
-    async register(email:string, password: string, discordId: string, sendMail: boolean) {
+    async register(email:string, password: string, discord_id: string, send_email: boolean) {
         return await api.post('/api/v1/bot/register', {
             email,
             password,
-            discordId,
-            sendMail
+            discord_id,
+            send_email
 
         });
     }
     
-    async logar(discordId: string) {
+    async logar(discord_id: string) {
         return await api.post('/api/v1/bot/register', {
-            discordId
+            discord_id
         });
     }
 
-    async delete(discordId:string) {
+    async delete(discord_id:string) {
         return await api.post('/api/v1/bot/delete', {
-            discordId
+            discord_id
         });
     }
 
-    async notas(discordId: string) {
+    async notas(discord_id: string) {
         return await api.get('/api/v1/bot/notas', {
-            params: {discordId}
+            params: {discord_id}
+        });
+    }
+    async aulas(discord_id: string) {
+        return await api.get('/api/v1/bot/aulas', {
+            params: {discord_id}
         });
     }
     
-    async boletos(discordId: string) {
+    async boletos(discord_id: string) {
         return await api.get('/api/v1/bot/boletos', {
-            params: {discordId}
+            params: {discord_id}
         });
     }
 }

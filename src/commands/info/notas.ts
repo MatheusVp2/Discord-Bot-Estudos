@@ -1,6 +1,6 @@
-import { Message } from "discord.js";
 import Client from "../../structures/Client";
 import { Command } from "../../structures/Command";
+import { ObjectConcat } from "../../utils/object-concat";
 
 export default class PingCommand extends Command {
 
@@ -11,8 +11,8 @@ export default class PingCommand extends Command {
         })
     }
 
-    run = (interaction: Message) => {
-        interaction.reply('ping');
+    run = async (data: any) => {
+        const { interaction, message } = ObjectConcat.ofMessageAndCommandInteraction(data);
     }
 
 }

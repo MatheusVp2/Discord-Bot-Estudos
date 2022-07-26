@@ -1,5 +1,6 @@
-import { MessageEmbed } from "discord.js";
+import { EmbedHorarios } from "../../Components/EmbedHorarios";
 import { DiasSemanaEnum } from "../../enums/DiasSemana";
+import { RequisicoesService } from "../../services/ServicesScrappingUCL/Index";
 import Client from "../../structures/Client";
 import { Command } from "../../structures/Command";
 import { ObjectConcat } from "../../utils/object-concat";
@@ -21,23 +22,18 @@ export default class AulasCommand extends Command {
         })
     }
 
-    run = (data: any) => {
+    run = async (data: any) => {
         const { interaction, message } = ObjectConcat.ofMessageAndCommandInteraction(data);
         const diaEscolhido = interaction.options.getString('dia');
+        const aulas = await RequisicoesService.aulas({ discord_id: interaction.user.id })
+
         console.log(DiasSemanaEnum.SEGUNDA == diaEscolhido);
-        const exampleEmbed = new MessageEmbed()
-            .setColor('#0099ff')
-            .setTitle(diaEscolhido)
-            .setURL('https://eies.ucl.br/webaluno/horarioindividual/')
-            .setDescription(`Suas aulas na ${diaEscolhido}`)
-            .addFields(
-                { name: '\u200B', value: '\u200B' }, // Espaço
-                { name: 'Nome matéria', value: 'Horário\nSala', inline: true },
-                { name: 'Nome matéria', value: 'Horário\nSala', inline: true },
-            )
-            .addField('Terça-Feira', '', false)
+        const exampleEmbed = EmbedHorarios.HorarioDia(diaEscolhido, [
+            { name: 'Algoritmos e Estruturas de Dados III', value: '18:45 → 20:15\nSala Lab BD 209', inline: true },
+            { name: 'Analytics – Inteligência de Negócios', value: '20:30 → 22:00\nSala Lab BD 209', inline: true },
+        ])
         
-        interaction.reply({content: `Suas aulas de ${diaEscolhido}`, ephemeral: false, embeds: [exampleEmbed]})
+        interaction.reply({content: `Suas aulas de ${diaEscolhido}`, ephemeral: true, embeds: [exampleEmbed]})
         
     }
 }

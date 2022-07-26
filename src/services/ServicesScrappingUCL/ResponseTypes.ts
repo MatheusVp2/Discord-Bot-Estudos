@@ -54,5 +54,5 @@ export type ResponseAulasType = {
     semana: string
     horario: string
     sala: string
-}[]
+}
 

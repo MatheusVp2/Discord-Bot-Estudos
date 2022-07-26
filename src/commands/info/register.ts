@@ -30,30 +30,26 @@ export default class PingCommand extends Command {
                     type: 'BOOLEAN',
                     description: 'EM DESENVOLVIMENTO...',
                     required: true
-                },
+                }
             ]
         })
     }
 
     run = async (data: any) => {
-        const { interaction, message } = ObjectConcat.ofMessageAndCommandInteraction(data);
+        const { interaction } = ObjectConcat.ofMessageAndCommandInteraction(data);
+
+        await interaction.reply({ content: "Cadastrando, aguarde um instante...", ephemeral: true })
+
         const email = interaction.options.getString('email');
         const password = interaction.options.getString('password');
         const send_email = interaction.options.getBoolean('send_email');
+        
         const user: RequestRegisterType = { email, password, send_email, discord_id: interaction.user.id }
-        RequisicoesService.registrar(user)
-            .then(async (dataR) => {
-                console.log(dataR.message);
-                
-                await interaction.reply({content: 'Usuario cadastrado com sucesso', ephemeral: true })
-            })
-            .catch((error) => {
-                const body = error.response.data
-                interaction.reply({content: body.message, ephemeral: true})
 
-            })
+        const service = new RequisicoesService();
+        const dados = await service.registrar(user)
 
-
+        interaction.editReply({ content: dados.message })
     }
 
 }

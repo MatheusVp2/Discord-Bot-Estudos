@@ -29,8 +29,8 @@ app.listen(server_port, function() {
     console.log("PASTA LOCAL");
     console.log(pasta);
 
-    const pasta2 = fs.readdirSync("./src")
-    console.log("PASTA LOCAL SRC");
+    const pasta2 = fs.readdirSync("./public")
+    console.log("PASTA LOCAL PUBLIC");
     console.log(pasta2);
     
     

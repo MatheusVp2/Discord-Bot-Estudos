@@ -1,1 +1,1 @@
-worker: node public/server.js
+worker: npm run server

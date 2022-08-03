@@ -42,6 +42,6 @@ const client = new Client({
 var server_port = process.env.PORT || 5000;
 
 app.listen(server_port, function() {
-    client.login( CLIENT_SECRET );
     console.log('Listening on port %d', server_port);
+    client.login( CLIENT_SECRET );
 });

@@ -1,4 +1,5 @@
-import { EmbedHorarios } from "../../Components/EmbedHorarios";
+
+import { EmbedFieldData, MessageEmbed } from "discord.js";
 import { DiasSemanaEnum } from "../../enums/DiasSemana";
 import { RequisicoesService } from "../../services/ServicesScrappingUCL/Index";
 import Client from "../../structures/Client";
@@ -23,6 +24,16 @@ export default class HorariosCommand extends Command {
     }
 
     run = async (data: any) => {
+
+        function createEmbedHorarios(semana: string, aulas: EmbedFieldData[]): MessageEmbed{
+            return new MessageEmbed()
+                .setColor('#0099ff')
+                .setTitle(semana)
+                .setURL('https://eies.ucl.br/webaluno/horarioindividual/')
+                .setDescription(`Suas aulas na ${semana}`)
+                .addFields(aulas)
+        }
+
         const { interaction } = ObjectConcat.ofMessageAndCommandInteraction(data);
 
         const semana = interaction.options.getString('dia');
@@ -39,7 +50,7 @@ export default class HorariosCommand extends Command {
             .filter(item => item.semana.toLowerCase() === semana.toLowerCase())
             .map(item => { return { name: item.materia, value: `Horario: ${item.horario}\n${item.sala}`, inline: false } })
 
-        const aulasEmbed = EmbedHorarios.create( semana, dados )
+        const aulasEmbed = createEmbedHorarios( semana, dados )
         
         const msg = {
             content: dados.length != 0 ? `Suas aulas de ${semana}` : `Não existe aulas na ${semana}`,

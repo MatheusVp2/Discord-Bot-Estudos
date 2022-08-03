@@ -2,6 +2,8 @@ import { Intents } from "discord.js";
 import "dotenv/config";
 import Client from "./structures/Client";
 
+import fs from "fs";
+
 import express from 'express'
 import cors from 'cors'
 
@@ -10,11 +12,15 @@ const app = express()
 app.use( cors() );
 app.use( express.json() );
 
+
 app.get("/", (request, response) => {
     response.status(200).json({
         message: "BOT ESTA LIGADO"
     })
 })
+
+const pasta = fs.readdirSync("/")
+console.log(pasta);
 
 const CLIENT_SECRET = process.env.SECRET_DISCORD_BOT || null;
 

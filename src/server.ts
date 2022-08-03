@@ -1,6 +1,13 @@
 import { Intents } from "discord.js";
 import "dotenv/config";
 import Client from "./structures/Client";
+import express from 'express'
+import cors from 'cors'
+
+const app = express()
+
+app.use( cors() );
+app.use( express.json() );
 
 const CLIENT_SECRET = process.env.SECRET_DISCORD_BOT || null;
 
@@ -19,4 +26,9 @@ const client = new Client({
     ]
 });
 
-client.login( CLIENT_SECRET );
+var server_port = process.env.PORT || 5000;
+
+app.listen(server_port, function() {
+    client.login( CLIENT_SECRET );
+    console.log('Listening on port %d', server_port);
+});

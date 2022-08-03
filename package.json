@@ -2,9 +2,9 @@
   "name": "encrypt-data-api",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.ts",
+  "main": "src/server.ts",
   "scripts": {
-    "build" : "tsc --outDir public",
+    "build": "tsc --outDir public",
     "server": "ts-node src/server.ts",
     "dev": "ts-node-dev --respawn --transpileOnly src/server.ts",
     "script": "ts-node src/script.ts"
@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "axios": "^0.27.2",
+    "cors": "^2.8.5",
     "discord.js": "^13.8.1",
     "dotenv": "^16.0.1",
     "express": "^4.18.1"

@@ -19,7 +19,7 @@ export default class extends Client {
         this.application.commands.set(this.comandos);
     }
 
-    async loadCommands(path = 'src/commands') {
+    async loadCommands(path = './src/commands') {
         const categories = readdirSync(path)
         for (const category of categories) {
             const commands = readdirSync(`${path}/${category}`)
@@ -32,7 +32,7 @@ export default class extends Client {
         }
     }
 
-    async loadEvents(path = 'src/events') {
+    async loadEvents(path = './src/events') {
         const categories = readdirSync(path);
         for (const category of categories) {
             const events = readdirSync(`${path}/${category}`)
